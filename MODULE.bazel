@@ -20,10 +20,10 @@ single_version_override(
     version = "0.2.9",
 )
 
-bazel_dep(name = "rules_java", version = "7.10.0")
+bazel_dep(name = "rules_java", version = "7.11.1")
 single_version_override(
     module_name = "rules_java",
-    version = "7.10.0",
+    version = "7.11.1",
 )
 
 bazel_dep(name = "rules_kotlin", version = "1.9.6")
