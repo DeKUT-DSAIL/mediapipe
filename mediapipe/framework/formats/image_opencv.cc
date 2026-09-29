@@ -14,6 +14,8 @@
 
 #include "mediapipe/framework/formats/image_opencv.h"
 
+#if !MEDIAPIPE_DISABLE_OPENCV
+
 #include "absl/log/absl_check.h"
 #include "mediapipe/framework/formats/image_format.pb.h"
 #include "mediapipe/framework/port/logging.h"
@@ -117,3 +119,5 @@ std::shared_ptr<cv::Mat> MatView(const mediapipe::Image* image) {
 }
 }  // namespace formats
 }  // namespace mediapipe
+
+#endif  // !MEDIAPIPE_DISABLE_OPENCV

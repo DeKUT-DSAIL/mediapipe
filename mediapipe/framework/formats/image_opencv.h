@@ -16,6 +16,8 @@
 #ifndef MEDIAPIPE_FRAMEWORK_FORMATS_IMAGE_OPENCV_H_
 #define MEDIAPIPE_FRAMEWORK_FORMATS_IMAGE_OPENCV_H_
 
+#if !MEDIAPIPE_DISABLE_OPENCV
+
 #include "mediapipe/framework/formats/image.h"
 #include "mediapipe/framework/port/opencv_core_inc.h"
 
@@ -35,5 +37,7 @@ std::shared_ptr<cv::Mat> MatView(const mediapipe::Image* image);
 
 }  // namespace formats
 }  // namespace mediapipe
+
+#endif  // !MEDIAPIPE_DISABLE_OPENCV
 
 #endif  // MEDIAPIPE_FRAMEWORK_FORMATS_IMAGE_FRAME_OPENCV_H_

@@ -62,7 +62,7 @@ void* ThreadPool::WorkerThread::ThreadBody(void* arg) {
   int nice_priority_level =
       thread->pool_->thread_options().nice_priority_level();
   const std::set<int> selected_cpus = thread->pool_->thread_options().cpu_set();
-#if defined(__linux__)
+#if defined(__linux__) && !defined(__EMSCRIPTEN__)
   const std::string name =
       internal::CreateThreadName(thread->name_prefix_, syscall(SYS_gettid));
   if (nice_priority_level != 0) {

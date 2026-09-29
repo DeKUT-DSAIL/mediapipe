@@ -130,3 +130,16 @@ try-import %workspace%/.configure.bazelrc
 
 # This bazelrc file can be used for user-specific custom build settings.
 try-import %workspace%/.user.bazelrc
+# WebAssembly (Emscripten) Config
+build:wasm --platforms=@emsdk//:platform_wasm
+build:wasm --cpu=wasm
+build:wasm --copt=-D__linux__
+build:wasm --copt=-D__NR_gettid=224
+build:wasm --copt=-DSYS_gettid=224
+build:wasm --copt=-Dsyscall(x)=-1
+build:wasm --copt=-pthread
+build:wasm --linkopt=-pthread
+build:wasm --define=MEDIAPIPE_DISABLE_OPENCV=1
+build:wasm --per_file_copt=.*external/pthreadpool/.*@-U__linux__
+build:wasm --per_file_copt=.*external/cpuinfo/.*@-U__linux__
+build:wasm --per_file_copt=.*absl/.*@-U__linux__

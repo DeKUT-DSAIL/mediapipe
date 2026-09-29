@@ -41,9 +41,9 @@ ABSL_FLAG(int, xnnpack_default_num_threads, 0,
           "Default number of xnnpack threads to use. If unset, determines a "
           "good default number based on the platform.");
 
-#if !defined(__EMSCRIPTEN__) || defined(__EMSCRIPTEN_PTHREADS__)
+#if !defined(__EMSCRIPTEN__)
 #include "mediapipe/util/cpu_util.h"
-#endif  // !__EMSCRIPTEN__ || __EMSCRIPTEN_PTHREADS__
+#endif  // !__EMSCRIPTEN__
 
 namespace mediapipe {
 namespace {
@@ -222,15 +222,14 @@ absl::Status CopyTfLiteTensorToTensor<char>(const TfLiteTensor& tflite_tensor,
 }  // namespace
 
 int GetCpuDefaultNumThreads() {
-#if defined(MEDIAPIPE_ANDROID) || defined(MEDIAPIPE_IOS) || \
-    defined(__EMSCRIPTEN_PTHREADS__)
+#if defined(MEDIAPIPE_ANDROID) || defined(MEDIAPIPE_IOS)
   constexpr int kMinNumThreadsByDefault = 1;
   constexpr int kMaxNumThreadsByDefault = 4;
   return std::clamp(NumCPUCores() / 2, kMinNumThreadsByDefault,
                     kMaxNumThreadsByDefault);
 #else
   return 1;
-#endif  // MEDIAPIPE_ANDROID || MEDIAPIPE_IOS || __EMSCRIPTEN_PTHREADS__
+#endif  // MEDIAPIPE_ANDROID || MEDIAPIPE_IOS
 }
 
 int GetXnnpackDefaultNumThreads() {
